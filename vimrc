@@ -24,7 +24,8 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
 Bundle 'bling/vim-airline'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'mileszs/ack.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -39,6 +40,12 @@ let g:flake8_show_in_file=1
 " let g:airline_theme='powerlineish'
 let python_highlight_all=1
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+
+let g:ctrlp_prompt_mappings = { 
+	\'AcceptSelection("e")': ['<c-v>', '<2-LeftMouse>'], 
+	\'AcceptSelection("v")': ['<cr>', '<RightMouse>'],
+	\ }
+
 
 autocmd StdinReadPre * let s:std_in=1
 autocmd BufWritePost *.py call Flake8()
@@ -62,7 +69,12 @@ import sys
 if 'VIRTUAL_ENV' in os.environ:
     project_base_dir = os.environ['VIRTUAL_ENV']
     activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-    execfile(activate_this, dict(__file__=activate_this))
+    if os.path.exists(activate_this):
+        if sys.version_info[0] < 3:
+            execfile(activate_this, dict(__file__=activate_this))
+        else:
+            with open(activate_this) as f:
+                exec(f.read(), {'__file__': activate_this})
 EOF
 
 if has('gui_running')
