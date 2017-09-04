@@ -27,6 +27,9 @@ Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'mileszs/ack.vim'
 Plugin 'vim-scripts/TaskList.vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'ternjs/tern_for_vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -37,7 +40,14 @@ let g:ycm_autoclose_preview_window_after_completion=1
 let g:airline_powerline_fonts=1
 let g:flake8_show_in_gutter=1
 let g:flake8_show_in_file=1
-let g:tlWindowPosition = 1
+let g:tlWindowPosition=1
+
+let g:javascript_plugin_jsdoc=1
+let g:javascript_plugin_ngdoc=1
+let g:javascript_plugin_flow=1
+set foldmethod=syntax
+
+let g:jsx_ext_required=0
 
 " let g:airline_theme='powerlineish'
 let python_highlight_all=1
